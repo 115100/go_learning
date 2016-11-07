@@ -8,13 +8,14 @@ func main() {
 	i := 1
 
 	for i <= 50 {
-		if i%3 == 0 && i%5 == 0 {
-			fmt.Println("Fizz buzz")
-		} else if i%3 == 0 {
+		switch {
+		case i%15 == 0:
+			fmt.Println("Fizzbuzz")
+		case i%3 == 0:
 			fmt.Println("Fizz")
-		} else if i%5 == 0 {
+		case i%5 == 0:
 			fmt.Println("Buzz")
-		} else {
+		default:
 			fmt.Println(i)
 		}
 
