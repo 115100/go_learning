@@ -32,6 +32,17 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	t.Execute(w, p)
 }
 
+func editHandler(w http.ResponseWriter, r *http.Request) {
+	title := r.URL.Path[len("/edit/"):]
+	p, err := loadPage(title)
+
+	if err != nil {
+		p = &Page{Title: title}
+	}
+
+	renderTemplate(w, "edit.html", p)
+}
+
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len("/view/"):]
 	p, err := loadPage(title)
@@ -42,17 +53,6 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	renderTemplate(w, "view.html", p)
-}
-
-func editHandler(w http.ResponseWriter, r *http.Request) {
-	title := r.URL.Path[len("/edit/"):]
-	p, err := loadPage(title)
-
-	if err != nil {
-		p = &Page{Title: title}
-	}
-
-	renderTemplate(w, "edit.html", p)
 }
 
 func main() {
